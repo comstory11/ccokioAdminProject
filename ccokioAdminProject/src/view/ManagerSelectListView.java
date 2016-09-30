@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -37,30 +38,36 @@ public class ManagerSelectListView {
 	public void managerSelectMenuList() {
 
 		while(true) {
-			System.out.print("[1. 매니저등록, 2. 매니저조회, 3. 매니저정보수정, 4. 매니저삭제, 5. 돌아가기] : ");
+			try {
+				System.out.print("[1. 매니저등록, 2. 매니저조회, 3. 매니저정보수정, 4. 매니저삭제, 5. 돌아가기] : ");
 
-			int selectedMenu = keyboard.nextInt();
+				int selectedMenu = keyboard.nextInt();
 
-			switch(selectedMenu) {
+				switch(selectedMenu) {
 
-			case 1:
-				Controllers.getManagerController().requestRegister();
-				break;
-			case 2:
-				Controllers.getManagerController().requestSelectOne();
-				break;
-			case 3:
-				Controllers.getManagerController().requestUpdateSearchNumber();
-				break;
-			case 4:
-				Controllers.getManagerController().requestDeleteSearchNumber();
-				break;
-			case 5:
-				Controllers.getMainController().requestAdminMainList();
-				break;
-			default :
-				System.out.println("메뉴를 다시 선택해주세요.");
+				case 1:
+					Controllers.getManagerController().requestRegister();
+					break;
+				case 2:
+					Controllers.getManagerController().requestSelectOne();
+					break;
+				case 3:
+					Controllers.getManagerController().requestUpdateSearchNumber();
+					break;
+				case 4:
+					Controllers.getManagerController().requestDeleteSearchNumber();
+					break;
+				case 5:
+					Controllers.getMainController().requestAdminMainList();
+					break;
+				default :
+					System.out.println("메뉴를 다시 선택해주세요.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getManagerController().requestSelectList();
 			}
+			
 		}
 
 	}

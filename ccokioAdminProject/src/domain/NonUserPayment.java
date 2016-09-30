@@ -10,6 +10,7 @@ public class NonUserPayment {
 	private int orderAmount;
 	private int totalPrice;
 	private String paymentFlag;
+	private String paymentDate;
 
 	public NonUserPayment() {
 
@@ -79,4 +80,16 @@ public class NonUserPayment {
 		this.paymentFlag = paymentFlag;
 	}
 
+	public String getPaymentDate() {
+		return paymentDate;
+	}
+
+	public void setPaymentDate(String paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+
+
+
+	
+	
 }

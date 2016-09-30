@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -38,27 +39,30 @@ public class ProductSelectListView {
 	public void productSelectMenuList() {
 
 		while (true) {
-			System.out.println("제품관리모드입니다");
-			System.out.println("1. 제품등록 || 2. 제품조회 || 3. 제품수정 || 4. 제품삭제  || 5. 나가기");
-			int selectedMenu = keyboard.nextInt();
+			try {
+				System.out.println("제품관리모드입니다");
+				System.out.println("1. 제품등록 || 2. 제품조회 || 3. 제품수정 || 4. 제품삭제  || 5. 나가기");
+				int selectedMenu = keyboard.nextInt();
 
-			if (selectedMenu == 1) {
-				Controllers.getProductController().requestProductRegister();
-			} else if (selectedMenu == 2) {
-				Controllers.getProductController().requestProductSelectOne();
-			} else if (selectedMenu == 3) {
-				Controllers.getProductController().requestUpdateSearchNumber();
-			} else if (selectedMenu == 4) {
-				Controllers.getProductController().requestDeleteSearchNumber();
-			} else if (selectedMenu == 5) {
-				Controllers.getLoginController().requestCheckLogin();
-				break;
-
-			} else {
-
-				System.out.println("잘못 입력하셨습니다");
-
+				if (selectedMenu == 1) {
+					Controllers.getProductController().requestProductRegister();
+				} else if (selectedMenu == 2) {
+					Controllers.getProductController().requestProductSelectOne();
+				} else if (selectedMenu == 3) {
+					Controllers.getProductController().requestUpdateSearchNumber();
+				} else if (selectedMenu == 4) {
+					Controllers.getProductController().requestDeleteSearchNumber();
+				} else if (selectedMenu == 5) {
+					Controllers.getLoginController().requestCheckLogin();
+					break;
+				} else {
+					System.out.println("메뉴를 다시 입력해주세요.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getProductController().requestProductSelectList();
 			}
+			
 		}
 	}
 

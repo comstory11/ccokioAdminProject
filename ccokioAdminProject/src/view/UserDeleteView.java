@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -17,12 +18,17 @@ public class UserDeleteView {
 		
 		int searchUserNumber = 0;
 
-		System.out.println("\n[회원 삭제 모드]");
-		System.out.print("삭제 할 회원번호 : ");
-		searchUserNumber = keyboard.nextInt();
+		try {
+			System.out.println("\n[회원 삭제 모드]");
+			System.out.print("삭제 할 회원번호 : ");
+			searchUserNumber = keyboard.nextInt();
 
-		Controllers.getUserController().requestDelete(searchUserNumber);
-		
+			Controllers.getUserController().requestDelete(searchUserNumber);
+		} catch (InputMismatchException e) {
+			System.out.println("올바른 입력을 입력해주세요.");
+			Controllers.getUserController().requestDeleteSearchNumber();
+		}
+			
 	}
 	
 	public void userDelete(int searchUserNumer) {

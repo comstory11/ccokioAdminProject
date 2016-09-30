@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -44,18 +45,26 @@ public class NonUserOrderListView {
 	public void nonUserOrderMenuList() {
 
 		while (true) {
-			System.out.print("[1. 메인메뉴 돌아가기] : ");
+			try {
+				
+				System.out.print("[1. 메인메뉴 돌아가기] : ");
 
-			int selectedMenu = keyboard.nextInt();
+				int selectedMenu = keyboard.nextInt();
 
-			switch (selectedMenu) {
+				switch (selectedMenu) {
 
-			case 1:
-				Controllers.getLoginController().requestCheckLogin();
-				break;
-			default:
-				System.out.println("메뉴를 다시 선택해주세요.");
+				case 1:
+					Controllers.getLoginController().requestCheckLogin();
+					break;
+				default:
+					System.out.println("메뉴를 다시 선택해주세요.");
+				}
+				
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getNonUserOrderController().requestNonUserOrderMenuList();
 			}
+			
 		}
 
 	}

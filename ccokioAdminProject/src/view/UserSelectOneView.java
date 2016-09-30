@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -20,12 +21,17 @@ public class UserSelectOneView {
 
 		int searchUserNumber = 0;
 
-		System.out.println("\n[회원 조회 모드]");
-		System.out.print("조회 할 회원번호 : ");
-		searchUserNumber = keyboard.nextInt();
+		try {
+			System.out.println("\n[회원 조회 모드]");
+			System.out.print("조회 할 회원번호 : ");
+			searchUserNumber = keyboard.nextInt();
 
-		Controllers.getUserController().requestReturnSelectOne(searchUserNumber);
-
+			Controllers.getUserController().requestReturnSelectOne(searchUserNumber);
+		} catch (InputMismatchException e) {
+			System.out.println("올바른 입력을 입력해주세요.");
+			Controllers.getUserController().requestSelectOne();
+		}
+		
 	}
 
 
@@ -46,23 +52,28 @@ public class UserSelectOneView {
 
 	public void userSelectOneMenu(User searchUser) {
 
-		while(true) {		
-			System.out.print("[1. 주문내역, 2. 결제내역, 3. 돌아가기] : ");
-			int selectedMenu = keyboard.nextInt();
+		while(true) {	
+			try {
+				System.out.print("[1. 주문내역, 2. 결제내역, 3. 돌아가기] : ");
+				int selectedMenu = keyboard.nextInt();
 
-			switch(selectedMenu) {
-			case 1:
-				Controllers.getUserOrderController().requestUserOrderList(searchUser);
-				break;
-			case 2:
-				Controllers.getUserPaymentController().requestPaymentList(searchUser);
-				break;
-			case 3:
-				Controllers.getUserController().requestSelectList();
-				break;
-			default :
-				System.out.println("메뉴를 다시 선택해주세요.");
+				switch(selectedMenu) {
+				case 1:
+					Controllers.getUserOrderController().requestUserOrderList(searchUser);
+					break;
+				case 2:
+					Controllers.getUserPaymentController().requestPaymentList(searchUser);
+					break;
+				case 3:
+					Controllers.getUserController().requestSelectList();
+					break;
+				default :
+					System.out.println("메뉴를 다시 선택해주세요.");
 
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getUserController().requestReturnSelectOne(searchUser.getUserNumber());
 			}
 
 		}

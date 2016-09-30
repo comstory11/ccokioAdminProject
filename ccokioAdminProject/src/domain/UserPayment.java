@@ -10,6 +10,7 @@ public class UserPayment {
 	private int orderAmount;
 	private int totalPrice;
 	private String paymentFlag;
+	private String paymentDate;
 	
 	public UserPayment() {
 	
@@ -77,6 +78,14 @@ public class UserPayment {
 
 	public void setPaymentFlag(String paymentFlag) {
 		this.paymentFlag = paymentFlag;
+	}
+
+	public String getPaymentDate() {
+		return paymentDate;
+	}
+
+	public void setPaymentDate(String paymentDate) {
+		this.paymentDate = paymentDate;
 	}
 
 	

@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -17,11 +18,18 @@ public class ManagerDeleteView {
 		
 		int searchMangerNumber = 0;
 
-		System.out.println("\n[매니저 삭제 모드]");
-		System.out.print("삭제 할 매니저번호 : ");
-		searchMangerNumber = keyboard.nextInt();
+		try {
+			System.out.println("\n[매니저 삭제 모드]");
+			System.out.print("삭제 할 매니저번호 : ");
+			searchMangerNumber = keyboard.nextInt();
 
-		Controllers.getManagerController().requestDelete(searchMangerNumber);
+			Controllers.getManagerController().requestDelete(searchMangerNumber);	
+			
+		} catch (InputMismatchException e) {
+			System.out.println("올바른 입력을 입력해주세요.");
+			Controllers.getManagerController().requestDeleteSearchNumber();
+		}
+		
 		
 	}
 	

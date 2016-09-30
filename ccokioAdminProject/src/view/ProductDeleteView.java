@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -18,11 +19,17 @@ public class ProductDeleteView {
 		
 		int searchProductNumber = 0;
 
-		System.out.println("\n[제품 삭제 모드]");
-		System.out.print("삭제 할 제품번호 : ");
-		searchProductNumber = keyboard.nextInt();
+		try {
+			System.out.println("\n[제품 삭제 모드]");
+			System.out.print("삭제 할 제품번호 : ");
+			searchProductNumber = keyboard.nextInt();
 
-		Controllers.getProductController().requestDelete(searchProductNumber);
+			Controllers.getProductController().requestDelete(searchProductNumber);
+		} catch (InputMismatchException e) {
+			System.out.println("올바른 입력을 입력해주세요.");
+			Controllers.getProductController().requestDeleteSearchNumber();
+		}
+		
 	}
 	
 	public void productDelete(int searchProductNumer) {

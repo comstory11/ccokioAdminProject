@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -19,11 +20,17 @@ public class NonUserSelectOneView {
 
 		int searchNonUserNumber = 0;
 
-		System.out.println("\n[회원 조회 모드]");
-		System.out.print("조회 할 비회원번호 : ");
-		searchNonUserNumber = keyboard.nextInt();
+		try {
+			System.out.println("\n[회원 조회 모드]");
+			System.out.print("조회 할 비회원번호 : ");
+			searchNonUserNumber = keyboard.nextInt();
 
-		Controllers.getNonUserController().requestReturnNonUserSelectOne(searchNonUserNumber);
+			Controllers.getNonUserController().requestReturnNonUserSelectOne(searchNonUserNumber);
+		} catch (InputMismatchException e) {
+			System.out.println("올바른 입력을 입력해주세요.");
+			Controllers.getNonUserController().requestSelectOne();
+		}
+		
 
 	}
 
@@ -40,24 +47,30 @@ public class NonUserSelectOneView {
 
 	public void nonUserSelectOneMenu(NonUser searchNonUser) {
 
-		while(true) {		
-			System.out.print("[1. 주문내역, 2. 결제내역, 3. 돌아가기] : ");
-			int selectedMenu = keyboard.nextInt();
+		while(true) {	
+			try {
+				System.out.print("[1. 주문내역, 2. 결제내역, 3. 돌아가기] : ");
+				int selectedMenu = keyboard.nextInt();
 
-			switch(selectedMenu) {
-			case 1:
-				Controllers.getNonUserOrderController().requestNonUserOrderList(searchNonUser);
-				break;
-			case 2:
-				Controllers.getNonUserPaymentController().requestPaymentList(searchNonUser);
-				break;
-			case 3:
-				Controllers.getNonUserController().requestNonUserSelectMenuList();
-				break;
-			default :
-				System.out.println("메뉴를 다시 선택해주세요.");
+				switch(selectedMenu) {
+				case 1:
+					Controllers.getNonUserOrderController().requestNonUserOrderList(searchNonUser);
+					break;
+				case 2:
+					Controllers.getNonUserPaymentController().requestPaymentList(searchNonUser);
+					break;
+				case 3:
+					Controllers.getNonUserController().requestNonUserSelectMenuList();
+					break;
+				default :
+					System.out.println("메뉴를 다시 선택해주세요.");
 
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getNonUserController().requestReturnNonUserSelectOne(searchNonUser.getNonUserNumber());
 			}
+			
 
 		}
 

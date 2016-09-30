@@ -23,7 +23,7 @@ public class UserPaymentDao {
 
 		try{
 
-			String sql = "select pm.userPaymentNumber, pm.userOrderNumber, o.userId, o.productName, p.productPrice, o.orderAmount, p.productPrice * o.orderAmount from UserOrder o, product p, userpayment pm where pm.userorderNumber = o.userorderNumber and o.productName = p.productName and o.paymentflag = 'y' and o.userId = ?";
+			String sql = "select pm.userPaymentNumber, pm.userOrderNumber, o.userId, o.productName, p.productPrice, o.orderAmount, p.productPrice * o.orderAmount, pm.paymentDate from UserOrder o, product p, userpayment pm where pm.userorderNumber = o.userorderNumber and o.productName = p.productName and o.paymentflag = 'y' and o.userId = ?";
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			pstmt.setString(1, searchUser.getUserId());
 
@@ -39,6 +39,7 @@ public class UserPaymentDao {
 				userPayment.setProductPrice(rs.getInt(5));
 				userPayment.setOrderAmount(rs.getInt(6));
 				userPayment.setTotalPrice(rs.getInt(7));
+				userPayment.setPaymentDate(rs.getString(8));
 				userPaymentList.add(userPayment);
 
 			}

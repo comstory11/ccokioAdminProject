@@ -9,19 +9,11 @@ public class Controllers {
 	private static UserController userController;
 	private static ManagerController managerController;
 	private static TotalPaymentController totalPaymentController;
-	
-	
-
-
 	private static NonUserController nonUserController;
 	private static NonUserOrderController nonUserOrderController;
 	private static NonUserPaymentController nonUserPaymentController;
 	private static UserOrderController userOrderController;
 	private static UserPaymentController   userPaymentController;
-
-	
-	
-	
 
 	public Controllers() {
 
@@ -32,15 +24,9 @@ public class Controllers {
 		userController = new UserController();
 		managerController = new ManagerController();
 		totalPaymentController = new TotalPaymentController();
-		
-		
-		
-
-		
 		nonUserController = new NonUserController();
 		nonUserOrderController = new NonUserOrderController();
 		nonUserPaymentController = new NonUserPaymentController();
-
 		userOrderController = new UserOrderController();
 		userPaymentController = new UserPaymentController();
 

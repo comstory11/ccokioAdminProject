@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -44,24 +45,30 @@ public class TotalPaymentSelectListView {
 	public void totalPaymentSelectMenuList() {
 
 		while(true) {
-			System.out.print("[1. 회원결제내역, 2. 비회원결제내역, 3. 돌아가기] : ");
+			try {
+				System.out.print("[1. 회원결제내역, 2. 비회원결제내역, 3. 돌아가기] : ");
 
-			int selectedMenu = keyboard.nextInt();
+				int selectedMenu = keyboard.nextInt();
 
-			switch(selectedMenu) {
+				switch(selectedMenu) {
 
-			case 1:
-				Controllers.getTotalPaymentController().requestSelectPaymentUserList();
-				break;
-			case 2:
-				Controllers.getTotalPaymentController().requestSelectPaymentNonUserList();
-				break;
-			case 3:
-				Controllers.getMainController().requestAdminMainList();
-				break;
-			default :
-				System.out.println("메뉴를 다시 선택해주세요.");
+				case 1:
+					Controllers.getTotalPaymentController().requestSelectPaymentUserList();
+					break;
+				case 2:
+					Controllers.getTotalPaymentController().requestSelectPaymentNonUserList();
+					break;
+				case 3:
+					Controllers.getMainController().requestAdminMainList();
+					break;
+				default :
+					System.out.println("메뉴를 다시 선택해주세요.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getTotalPaymentController().requestSelectList();
 			}
+			
 		}
 
 	}
@@ -97,18 +104,24 @@ public class TotalPaymentSelectListView {
 	public void userPaymentSelectMenuList() {
 
 		while(true) {
-			System.out.print("[1. 돌아가기] : ");
+			try {
+				System.out.print("[1. 돌아가기] : ");
 
-			int selectedMenu = keyboard.nextInt();
+				int selectedMenu = keyboard.nextInt();
 
-			switch(selectedMenu) {
+				switch(selectedMenu) {
 
-			case 1:
-				Controllers.getTotalPaymentController().requestSelectList();
-				break;
-			default :
-				System.out.println("메뉴를 다시 선택해주세요.");
+				case 1:
+					Controllers.getTotalPaymentController().requestSelectList();
+					break;
+				default :
+					System.out.println("메뉴를 다시 선택해주세요.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getTotalPaymentController().requestSelectPaymentUserList();
 			}
+			
 		}
 
 	}
@@ -143,18 +156,24 @@ public class TotalPaymentSelectListView {
 	public void nonUserPaymentSelectMenuList() {
 
 		while(true) {
-			System.out.print("[1. 돌아가기] : ");
+			try {
+				System.out.print("[1. 돌아가기] : ");
 
-			int selectedMenu = keyboard.nextInt();
+				int selectedMenu = keyboard.nextInt();
 
-			switch(selectedMenu) {
+				switch(selectedMenu) {
 
-			case 1:
-				Controllers.getTotalPaymentController().requestSelectList();
-				break;
-			default :
-				System.out.println("메뉴를 다시 선택해주세요.");
+				case 1:
+					Controllers.getTotalPaymentController().requestSelectList();
+					break;
+				default :
+					System.out.println("메뉴를 다시 선택해주세요.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getTotalPaymentController().requestSelectPaymentNonUserList();
 			}
+			
 		}
 
 	}

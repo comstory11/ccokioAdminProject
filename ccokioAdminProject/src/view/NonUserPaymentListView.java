@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -20,7 +21,7 @@ public class NonUserPaymentListView {
 
 		int sumPrice = 0;
 		System.out.println("[결제 내역 목록]");
-		System.out.println("결제 번호\t주문 번호\t비회원 전화번호\t제품 이름\t제품 가격\t수량\t합계금액");
+		System.out.println("결제 번호\t주문 번호\t전화번호\t제품 이름\t제품 가격\t수량\t합계금액\t결제 날짜");
 		if (nonUserPaymentList.size() == 0) {
 			System.out.println("결제된 제품이 없습니다.");
 		} else {
@@ -32,7 +33,8 @@ public class NonUserPaymentListView {
 				System.out.print(nonUserPaymentList.get(i).getProductName() + "\t");
 				System.out.print(nonUserPaymentList.get(i).getProductPrice() + "\t");
 				System.out.print(nonUserPaymentList.get(i).getOrderAmount() + "\t");
-				System.out.println(nonUserPaymentList.get(i).getTotalPrice());
+				System.out.print(nonUserPaymentList.get(i).getTotalPrice() + "\t");
+				System.out.println(nonUserPaymentList.get(i).getPaymentDate());
 				sumPrice = sumPrice + nonUserPaymentList.get(i).getTotalPrice();
 			}
 
@@ -46,18 +48,24 @@ public class NonUserPaymentListView {
 	public void nonUserPaymentMenuList() {
 
 		while (true) {
-			System.out.print("[1. 메인메뉴 돌아가기] : ");
+			try {
+				System.out.print("[1. 메인메뉴 돌아가기] : ");
 
-			int selectedMenu = keyboard.nextInt();
+				int selectedMenu = keyboard.nextInt();
 
-			switch (selectedMenu) {
+				switch (selectedMenu) {
 
-			case 1:
-				Controllers.getLoginController().requestCheckLogin();
-				break;
-			default:
-				System.out.println("메뉴를 다시 선택해주세요.");
+				case 1:
+					Controllers.getLoginController().requestCheckLogin();
+					break;
+				default:
+					System.out.println("메뉴를 다시 선택해주세요.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getNonUserPaymentController().requestPaymentMenuList();
 			}
+			
 		}
 
 	}

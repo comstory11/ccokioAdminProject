@@ -22,7 +22,7 @@ public class NonUserPaymentDao {
 
 		try {
 
-			String sql = "select pm.nonUserPaymentNumber, pm.nonUserOrderNumber, o.nonUserTel, o.productName, p.productPrice, o.orderAmount, p.productPrice * o.orderAmount "
+			String sql = "select pm.nonUserPaymentNumber, pm.nonUserOrderNumber, o.nonUserTel, o.productName, p.productPrice, o.orderAmount, p.productPrice * o.orderAmount, pm.paymentDate "
 					+ "from nonUserOrder o, product p, nonUserPayment pm "
 					+ "where pm.nonUserOrderNumber = o.nonUserOrderNumber "
 					+ "and o.productName = p.productName "
@@ -42,6 +42,7 @@ public class NonUserPaymentDao {
 				nonUserPayment.setProductPrice(rs.getInt(5));
 				nonUserPayment.setOrderAmount(rs.getInt(6));
 				nonUserPayment.setTotalPrice(rs.getInt(7));
+				nonUserPayment.setPaymentDate(rs.getString(8));
 				nonUserPaymentList.add(nonUserPayment);
 
 			}

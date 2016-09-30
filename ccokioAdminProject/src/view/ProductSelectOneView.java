@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controllers;
@@ -20,11 +21,16 @@ public class ProductSelectOneView {
 
 		int searchProductNumber = 0;
 
-		System.out.println("\n[제품 조회 모드]");
-		System.out.print("조회 할 제품번호 : ");
-		searchProductNumber = keyboard.nextInt();
+		try {
+			System.out.println("\n[제품 조회 모드]");
+			System.out.print("조회 할 제품번호 : ");
+			searchProductNumber = keyboard.nextInt();
 
-		Controllers.getProductController().requestReturnSelectOne(searchProductNumber);
+			Controllers.getProductController().requestReturnSelectOne(searchProductNumber);
+		} catch (InputMismatchException e) {
+			System.out.println("올바른 입력을 입력해주세요.");
+			Controllers.getProductController().requestProductSelectOne();
+		}
 
 	}
 
@@ -43,23 +49,28 @@ public class ProductSelectOneView {
 	public void ProductSelectOneMenu(Product searchProduct) {
 
 		while (true) {
-			System.out.print("[1. 제품 수정, 2. 제품 삭제, 3. 돌아가기] : ");
-			int selectedMenu = keyboard.nextInt();
+			try {
+				System.out.print("[1. 제품 수정, 2. 제품 삭제, 3. 돌아가기] : ");
+				int selectedMenu = keyboard.nextInt();
 
-			switch (selectedMenu) {
-			case 1:
-				Controllers.getProductController().requestUpdate(searchProduct.getProductNumber());
-				break;
-			case 2:
-				Controllers.getProductController().requestDelete(searchProduct.getProductNumber());
-				break;
-			case 3:
-				Controllers.getProductController().requestProductSelectList();
-				break;
-			default:
-				System.out.println("메뉴를 다시 선택해주세요.");
+				switch (selectedMenu) {
+				case 1:
+					Controllers.getProductController().requestUpdate(searchProduct.getProductNumber());
+					break;
+				case 2:
+					Controllers.getProductController().requestDelete(searchProduct.getProductNumber());
+					break;
+				case 3:
+					Controllers.getProductController().requestProductSelectList();
+					break;
+				default:
+					System.out.println("메뉴를 다시 선택해주세요.");
 
-			}
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("올바른 입력을 입력해주세요.");
+				Controllers.getProductController().requestReturnSelectOne(searchProduct.getProductNumber());
+			}	
 
 		}
 
