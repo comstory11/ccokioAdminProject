@@ -19,7 +19,7 @@ public class TotalPaymentDao {
 		try {
 
 			stmt = Controllers.getProgramController().getConnection().createStatement();
-			String sql = "select o.userId, u.userName, u.userTel, o.productName, p.productPrice, o.orderAmount, p.productPrice * o.orderAmount from UserOrder o, User1 u, Product p where o.userId = u.userId and o.productName = p.productName and o.paymentflag = 'y'";
+			String sql = "select * from A_UP_view_PaymentInfor";
 			rs = stmt.executeQuery(sql);
 
 			while(rs.next()) {
@@ -28,10 +28,13 @@ public class TotalPaymentDao {
 				userPayment.setUserId(rs.getString(1));
 				userPayment.setUserName(rs.getString(2));
 				userPayment.setUserTel(rs.getString(3));
-				userPayment.setProductName(rs.getString(4));
-				userPayment.setProductPrice(rs.getInt(5));
-				userPayment.setOrderAmount(rs.getInt(6));
-				userPayment.setTotalPrice(rs.getInt(7));
+				userPayment.setClassName(rs.getString(4));
+				userPayment.setDisCount(rs.getInt(5));
+				userPayment.setProductName(rs.getString(6));
+				userPayment.setProductPrice(rs.getInt(7));
+				userPayment.setOrderAmount(rs.getInt(8));
+				userPayment.setCouponUseAmount(rs.getInt(9));
+				userPayment.setUserTotalPrice(rs.getFloat(10));
 				totalPaymentList.add(userPayment);
 
 			}
@@ -47,13 +50,10 @@ public class TotalPaymentDao {
 				userPayment.setProductName(rs2.getString(3));
 				userPayment.setProductPrice(rs2.getInt(4));
 				userPayment.setOrderAmount(rs2.getInt(5));
-				userPayment.setTotalPrice(rs2.getInt(6));
+				userPayment.setNonUserTotalPrice(rs2.getInt(6));
 				totalPaymentList.add(userPayment);
-
 			}
 			
-
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -8,9 +8,12 @@ public class UserPayment {
 	private String productName;
 	private int productPrice;
 	private int orderAmount;
-	private int totalPrice;
+	private float totalPrice;
 	private String paymentFlag;
 	private String paymentDate;
+	private String className;
+	private float disCount;
+	private int couponUseAmount;
 	
 	public UserPayment() {
 	
@@ -64,11 +67,11 @@ public class UserPayment {
 		this.orderAmount = orderAmount;
 	}
 
-	public int getTotalPrice() {
+	public float getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(int totalPrice) {
+	public void setTotalPrice(float totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
@@ -88,7 +91,29 @@ public class UserPayment {
 		this.paymentDate = paymentDate;
 	}
 
-	
-	
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public float getDisCount() {
+		return disCount;
+	}
+
+	public void setDisCount(float disCount) {
+		this.disCount = disCount;
+	}
+
+	public int getCouponUseAmount() {
+		return couponUseAmount;
+	}
+
+	public void setCouponUseAmount(int couponUseAmount) {
+		this.couponUseAmount = couponUseAmount;
+	}
+
 	
 }

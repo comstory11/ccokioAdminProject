@@ -86,10 +86,6 @@ public class NonUserPayment {
 
 	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
-	}
-
-
-
-	
+	}	
 	
 }

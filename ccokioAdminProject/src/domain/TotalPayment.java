@@ -8,7 +8,11 @@ public class TotalPayment {
 	private String productName;
 	private int productPrice;
 	private int orderAmount;
-	private int totalPrice;
+	private float userTotalPrice;
+	private float nonUserTotalPrice;
+	private String className = "해당 안됨";
+	private float disCount;
+	private int couponUseAmount;
 	
 	
 	public String getUserId() {
@@ -41,19 +45,42 @@ public class TotalPayment {
 	public void setOrderAmount(int orderAmount) {
 		this.orderAmount = orderAmount;
 	}
-	public int getTotalPrice() {
-		return totalPrice;
-	}
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
-	}
 	public int getProductPrice() {
 		return productPrice;
 	}
 	public void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
 	}
-	
 
-	
+	public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
+	public float getDisCount() {
+		return disCount;
+	}
+	public void setDisCount(float disCount) {
+		this.disCount = disCount;
+	}
+	public int getCouponUseAmount() {
+		return couponUseAmount;
+	}
+	public void setCouponUseAmount(int couponUseAmount) {
+		this.couponUseAmount = couponUseAmount;
+	}
+	public float getUserTotalPrice() {
+		return userTotalPrice;
+	}
+	public void setUserTotalPrice(float userTotalPrice) {
+		this.userTotalPrice = userTotalPrice;
+	}
+	public float getNonUserTotalPrice() {
+		return nonUserTotalPrice;
+	}
+	public void setNonUserTotalPrice(float nonUserTotalPrice) {
+		this.nonUserTotalPrice = nonUserTotalPrice;
+	}	
+
 }

@@ -19,9 +19,9 @@ public class UserPaymentListView {
 
 	public void userPaymentList(ArrayList<UserPayment> userPaymentList) {
 
-		int sumPrice = 0;
+		float sumPrice = 0;
 		System.out.println("[결제 내역 목록]");
-		System.out.println("결제 번호\t주문 번호\t회원 아이디\t제품 이름\t제품 가격\t수량\t합계금액\t결제날짜");
+		System.out.println("결제 번호\t주문 번호\t회원 아이디\t회원 등급\t제품 이름\t제품 가격\t수량\t쿠폰사용\t합계금액\t결제날짜");
 		if (userPaymentList.size() == 0) {
 			System.out.println("결제된 제품이 없습니다.");
 		} else {
@@ -30,9 +30,11 @@ public class UserPaymentListView {
 				System.out.print(userPaymentList.get(i).getUserPaymentNumber() + "\t");
 				System.out.print(userPaymentList.get(i).getUserOrderNumber() + "\t");
 				System.out.print(userPaymentList.get(i).getUserId() + "\t");
+				System.out.print(userPaymentList.get(i).getClassName() + "\t");
 				System.out.print(userPaymentList.get(i).getProductName() + "\t");
 				System.out.print(userPaymentList.get(i).getProductPrice() + "\t");
 				System.out.print(userPaymentList.get(i).getOrderAmount() + "\t");
+				System.out.print(userPaymentList.get(i).getCouponUseAmount() + "\t");
 				System.out.print(userPaymentList.get(i).getTotalPrice() + "\t");
 				System.out.println(userPaymentList.get(i).getPaymentDate());
 				sumPrice = sumPrice + userPaymentList.get(i).getTotalPrice();

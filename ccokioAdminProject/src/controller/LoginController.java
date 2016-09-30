@@ -13,7 +13,6 @@ public class LoginController {
 		loginDao = new LoginDao();
 	}
 
-
 	public void requestLogin() {
 
 		LoginView loginView = new LoginView();

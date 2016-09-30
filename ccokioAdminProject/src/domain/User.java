@@ -12,11 +12,9 @@ public class User {
 	private int coupon;
 	private int purchaseQuantity;
 	
-
 	public User() {
 		
 	}
-
 
 	public int getUserNumber() {
 		return userNumber;
@@ -106,7 +104,6 @@ public class User {
 	public void setPurchaseQuantity(int purchaseQuantity) {
 		this.purchaseQuantity = purchaseQuantity;
 	}
-	
 	
 	
 }

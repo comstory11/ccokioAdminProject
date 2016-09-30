@@ -36,10 +36,7 @@ public class UserDao {
 				user.setCoupon(rs.getInt("coupon"));
 				user.setPurchaseQuantity(rs.getInt("purchaseQuantity"));
 				userList.add(user);
-
 			}
-
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

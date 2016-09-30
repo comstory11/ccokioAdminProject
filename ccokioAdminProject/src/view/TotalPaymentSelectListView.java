@@ -17,22 +17,35 @@ public class TotalPaymentSelectListView {
 
 	public void totalPaymentSelctList(ArrayList<TotalPayment> totalPaymentList) {
 
-		int sumPrice = 0;
+		float sumPrice = 0;
 		System.out.println("\n[총 결제내역 목록 보기 모드]");
-		System.out.println("아이디\t이름\t전화번호\t제품이름\t제품가격\t수량\t합계금액");
+		System.out.println("[할인률] 실버 : 10%, 골드 : 15%, 플래티넘 : 20%");
+		System.out.println("아이디\t이름\t전화번호\t등급\t제품이름\t제품가격\t수량\t쿠폰사용\t합계금액");
 		if(totalPaymentList.size() == 0) {
 			System.out.println("결제내역이 없습니다.");
 		} else {
 
 			for(int i = 0; i < totalPaymentList.size(); i++) {
+				boolean success = false;
+				if(totalPaymentList.get(i).getUserId().equals("비회원")) {
+					success = true;
+				}
 				System.out.print(totalPaymentList.get(i).getUserId() + "\t");
 				System.out.print(totalPaymentList.get(i).getUserName() + "\t");
 				System.out.print(totalPaymentList.get(i).getUserTel() + "\t");
+				System.out.print(totalPaymentList.get(i).getClassName() + "\t");
 				System.out.print(totalPaymentList.get(i).getProductName() + "\t");
 				System.out.print(totalPaymentList.get(i).getProductPrice() + "\t");
 				System.out.print(totalPaymentList.get(i).getOrderAmount() + "\t");
-				System.out.println(totalPaymentList.get(i).getTotalPrice());
-				sumPrice = sumPrice + totalPaymentList.get(i).getTotalPrice();
+				if(success) {
+					System.out.print("해당 안됨\t");
+					System.out.println(totalPaymentList.get(i).getNonUserTotalPrice());
+					sumPrice = sumPrice + totalPaymentList.get(i).getNonUserTotalPrice();
+				} else {
+					System.out.print(totalPaymentList.get(i).getCouponUseAmount() + "\t");
+					System.out.println(totalPaymentList.get(i).getUserTotalPrice());
+					sumPrice = sumPrice + totalPaymentList.get(i).getUserTotalPrice();
+				}
 			}
 			System.out.println("총 합계 : " + sumPrice);
 		}
@@ -68,16 +81,17 @@ public class TotalPaymentSelectListView {
 				System.out.println("올바른 입력을 입력해주세요.");
 				Controllers.getTotalPaymentController().requestSelectList();
 			}
-			
+
 		}
 
 	}
 
 	public void userPaymentSelctList(ArrayList<TotalPayment> totalPaymentList) {
 
-		int sumPrice = 0;
+		float sumPrice = 0;
 		System.out.println("\n[회원 결제내역 목록 보기 모드]");
-		System.out.println("아이디\t이름\t전화번호\t제품이름\t제품가격\t수량\t합계금액");
+		System.out.println("[할인률] 실버 : 10%, 골드 : 15%, 플래티넘 : 20%");
+		System.out.println("아이디\t이름\t전화번호\t등급\t제품이름\t제품가격\t수량\t쿠폰사용\t합계금액");
 		if(totalPaymentList.size() == 0) {
 			System.out.println("결제내역이 없습니다.");
 		} else {
@@ -87,11 +101,13 @@ public class TotalPaymentSelectListView {
 					System.out.print(totalPaymentList.get(i).getUserId() + "\t");
 					System.out.print(totalPaymentList.get(i).getUserName() + "\t");
 					System.out.print(totalPaymentList.get(i).getUserTel() + "\t");
+					System.out.print(totalPaymentList.get(i).getClassName() + "\t");
 					System.out.print(totalPaymentList.get(i).getProductName() + "\t");
 					System.out.print(totalPaymentList.get(i).getProductPrice() + "\t");
 					System.out.print(totalPaymentList.get(i).getOrderAmount() + "\t");
-					System.out.println(totalPaymentList.get(i).getTotalPrice());
-					sumPrice = sumPrice + totalPaymentList.get(i).getTotalPrice();
+					System.out.print(totalPaymentList.get(i).getCouponUseAmount() + "\t");
+					System.out.println(totalPaymentList.get(i).getUserTotalPrice());
+					sumPrice = sumPrice + totalPaymentList.get(i).getUserTotalPrice();
 				}
 			}
 			System.out.println("총 합계 : " + sumPrice);
@@ -100,7 +116,7 @@ public class TotalPaymentSelectListView {
 		Controllers.getTotalPaymentController().requestSelectPaymentUserMenuList();
 
 	}
-	
+
 	public void userPaymentSelectMenuList() {
 
 		while(true) {
@@ -121,14 +137,14 @@ public class TotalPaymentSelectListView {
 				System.out.println("올바른 입력을 입력해주세요.");
 				Controllers.getTotalPaymentController().requestSelectPaymentUserList();
 			}
-			
+
 		}
 
 	}
-	
+
 	public void nonUserPaymentSelctList(ArrayList<TotalPayment> totalPaymentList) {
 
-		int sumPrice = 0;
+		float sumPrice = 0;
 		System.out.println("\n[비회원 결제내역 목록 보기 모드]");
 		System.out.println("이름\t전화번호\t제품이름\t제품가격\t수량\t합계금액");
 		if(totalPaymentList.size() == 0) {
@@ -142,8 +158,8 @@ public class TotalPaymentSelectListView {
 					System.out.print(totalPaymentList.get(i).getProductName() + "\t");
 					System.out.print(totalPaymentList.get(i).getProductPrice() + "\t");
 					System.out.print(totalPaymentList.get(i).getOrderAmount() + "\t");
-					System.out.println(totalPaymentList.get(i).getTotalPrice());
-					sumPrice = sumPrice + totalPaymentList.get(i).getTotalPrice();
+					System.out.println(totalPaymentList.get(i).getNonUserTotalPrice());
+					sumPrice = sumPrice + totalPaymentList.get(i).getNonUserTotalPrice();
 				}
 			}
 			System.out.println("총 합계 : " + sumPrice);
@@ -152,7 +168,7 @@ public class TotalPaymentSelectListView {
 		Controllers.getTotalPaymentController().requestSelectPaymentNonUserMenuList();
 
 	}
-	
+
 	public void nonUserPaymentSelectMenuList() {
 
 		while(true) {
@@ -173,7 +189,7 @@ public class TotalPaymentSelectListView {
 				System.out.println("올바른 입력을 입력해주세요.");
 				Controllers.getTotalPaymentController().requestSelectPaymentNonUserList();
 			}
-			
+
 		}
 
 	}

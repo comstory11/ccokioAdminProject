@@ -23,7 +23,7 @@ public class UserPaymentDao {
 
 		try{
 
-			String sql = "select pm.userPaymentNumber, pm.userOrderNumber, o.userId, o.productName, p.productPrice, o.orderAmount, p.productPrice * o.orderAmount, pm.paymentDate from UserOrder o, product p, userpayment pm where pm.userorderNumber = o.userorderNumber and o.productName = p.productName and o.paymentflag = 'y' and o.userId = ?";
+			String sql = "select pm.userPaymentNumber, pm.userOrderNumber, o.userId, d.className, o.productName, p.productPrice, o.orderAmount, o.couponuseAmount, (((o.orderAmount - o.couponuseAmount)*p.productPrice)*d.discount), pm.paymentDate from UserOrder o, product p, userpayment pm, discount d, user1 u where pm.userorderNumber = o.userorderNumber and o.productName = p.productName and u.userClass = d.udiscountClassNumber and o.paymentflag = 'y' and o.userId = ?";
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			pstmt.setString(1, searchUser.getUserId());
 
@@ -35,11 +35,13 @@ public class UserPaymentDao {
 				userPayment.setUserPaymentNumber(rs.getInt(1));
 				userPayment.setUserOrderNumber(rs.getInt(2));
 				userPayment.setUserId(rs.getString(3));
-				userPayment.setProductName(rs.getString(4));
-				userPayment.setProductPrice(rs.getInt(5));
-				userPayment.setOrderAmount(rs.getInt(6));
-				userPayment.setTotalPrice(rs.getInt(7));
-				userPayment.setPaymentDate(rs.getString(8));
+				userPayment.setClassName(rs.getString(4));
+				userPayment.setProductName(rs.getString(5));
+				userPayment.setProductPrice(rs.getInt(6));
+				userPayment.setOrderAmount(rs.getInt(7));
+				userPayment.setCouponUseAmount(rs.getInt(8));
+				userPayment.setTotalPrice(rs.getFloat(9));
+				userPayment.setPaymentDate(rs.getString(10));
 				userPaymentList.add(userPayment);
 
 			}

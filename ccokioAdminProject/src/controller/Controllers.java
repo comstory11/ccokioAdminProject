@@ -31,9 +31,6 @@ public class Controllers {
 		userPaymentController = new UserPaymentController();
 
 	}
-
-	
-	
 	
 	public static ProgramController getProgramController() {
 		return programController;
@@ -71,39 +68,16 @@ public class Controllers {
 		return totalPaymentController;
 	}
 
-
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
 	public static NonUserController getNonUserController() {
 		return nonUserController;
 	}
-
-
-
-
+	
 	public static NonUserOrderController getNonUserOrderController() {
 		return nonUserOrderController;
 	}
 
-
-
-
 	public static NonUserPaymentController getNonUserPaymentController() {
 		return nonUserPaymentController;
 	}
-
-
-
 	
 }
-
-

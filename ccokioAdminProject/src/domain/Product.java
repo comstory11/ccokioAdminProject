@@ -80,7 +80,5 @@ public class Product {
 		this.productOrigin = productOrigin;
 	
 	}
-
-	
 	
 }
